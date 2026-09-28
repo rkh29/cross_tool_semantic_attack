@@ -1,0 +1,505 @@
+{
+  "description": "Synthetic public records; source tool returns payload_json verbatim.",
+  "records": [
+    {
+      "payment_id": "P0001",
+      "records": {
+        "A": {
+          "actor": "system",
+          "payload_json": "{\"payment_id\":\"P0001\",\"amount_cents\":500}"
+        },
+        "B": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0001\",\"amount\":500}"
+        },
+        "C": {
+          "actor": "system",
+          "payload_json": "{\"payment_id\":\"P0001\",\"amount\":500}"
+        },
+        "D": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0001\",\"amount\":500}"
+        },
+        "E": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0001\",\"amount\":500}"
+        }
+      }
+    },
+    {
+      "payment_id": "P0002",
+      "records": {
+        "A": {
+          "actor": "system",
+          "payload_json": "{\"payment_id\":\"P0002\",\"amount_cents\":100}"
+        },
+        "B": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0002\",\"amount\":100}"
+        },
+        "C": {
+          "actor": "system",
+          "payload_json": "{\"payment_id\":\"P0002\",\"amount\":100}"
+        },
+        "D": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0002\",\"amount\":100}"
+        },
+        "E": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0002\",\"amount\":100}"
+        }
+      }
+    },
+    {
+      "payment_id": "P0003",
+      "records": {
+        "A": {
+          "actor": "system",
+          "payload_json": "{\"payment_id\":\"P0003\",\"amount_cents\":200}"
+        },
+        "B": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0003\",\"amount\":200}"
+        },
+        "C": {
+          "actor": "system",
+          "payload_json": "{\"payment_id\":\"P0003\",\"amount\":200}"
+        },
+        "D": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0003\",\"amount\":200}"
+        },
+        "E": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0003\",\"amount\":200}"
+        }
+      }
+    },
+    {
+      "payment_id": "P0004",
+      "records": {
+        "A": {
+          "actor": "system",
+          "payload_json": "{\"payment_id\":\"P0004\",\"amount_cents\":300}"
+        },
+        "B": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0004\",\"amount\":300}"
+        },
+        "C": {
+          "actor": "system",
+          "payload_json": "{\"payment_id\":\"P0004\",\"amount\":300}"
+        },
+        "D": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0004\",\"amount\":300}"
+        },
+        "E": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0004\",\"amount\":300}"
+        }
+      }
+    },
+    {
+      "payment_id": "P0005",
+      "records": {
+        "A": {
+          "actor": "system",
+          "payload_json": "{\"payment_id\":\"P0005\",\"amount_cents\":400}"
+        },
+        "B": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0005\",\"amount\":400}"
+        },
+        "C": {
+          "actor": "system",
+          "payload_json": "{\"payment_id\":\"P0005\",\"amount\":400}"
+        },
+        "D": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0005\",\"amount\":400}"
+        },
+        "E": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0005\",\"amount\":400}"
+        }
+      }
+    },
+    {
+      "payment_id": "P0006",
+      "records": {
+        "A": {
+          "actor": "system",
+          "payload_json": "{\"payment_id\":\"P0006\",\"amount_cents\":600}"
+        },
+        "B": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0006\",\"amount\":600}"
+        },
+        "C": {
+          "actor": "system",
+          "payload_json": "{\"payment_id\":\"P0006\",\"amount\":600}"
+        },
+        "D": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0006\",\"amount\":600}"
+        },
+        "E": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0006\",\"amount\":600}"
+        }
+      }
+    },
+    {
+      "payment_id": "P0007",
+      "records": {
+        "A": {
+          "actor": "system",
+          "payload_json": "{\"payment_id\":\"P0007\",\"amount_cents\":700}"
+        },
+        "B": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0007\",\"amount\":700}"
+        },
+        "C": {
+          "actor": "system",
+          "payload_json": "{\"payment_id\":\"P0007\",\"amount\":700}"
+        },
+        "D": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0007\",\"amount\":700}"
+        },
+        "E": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0007\",\"amount\":700}"
+        }
+      }
+    },
+    {
+      "payment_id": "P0008",
+      "records": {
+        "A": {
+          "actor": "system",
+          "payload_json": "{\"payment_id\":\"P0008\",\"amount_cents\":800}"
+        },
+        "B": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0008\",\"amount\":800}"
+        },
+        "C": {
+          "actor": "system",
+          "payload_json": "{\"payment_id\":\"P0008\",\"amount\":800}"
+        },
+        "D": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0008\",\"amount\":800}"
+        },
+        "E": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0008\",\"amount\":800}"
+        }
+      }
+    },
+    {
+      "payment_id": "P0009",
+      "records": {
+        "A": {
+          "actor": "system",
+          "payload_json": "{\"payment_id\":\"P0009\",\"amount_cents\":900}"
+        },
+        "B": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0009\",\"amount\":900}"
+        },
+        "C": {
+          "actor": "system",
+          "payload_json": "{\"payment_id\":\"P0009\",\"amount\":900}"
+        },
+        "D": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0009\",\"amount\":900}"
+        },
+        "E": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0009\",\"amount\":900}"
+        }
+      }
+    },
+    {
+      "payment_id": "P0010",
+      "records": {
+        "A": {
+          "actor": "system",
+          "payload_json": "{\"payment_id\":\"P0010\",\"amount_cents\":1000}"
+        },
+        "B": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0010\",\"amount\":1000}"
+        },
+        "C": {
+          "actor": "system",
+          "payload_json": "{\"payment_id\":\"P0010\",\"amount\":1000}"
+        },
+        "D": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0010\",\"amount\":1000}"
+        },
+        "E": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0010\",\"amount\":1000}"
+        }
+      }
+    },
+    {
+      "payment_id": "P0011",
+      "records": {
+        "A": {
+          "actor": "system",
+          "payload_json": "{\"payment_id\":\"P0011\",\"amount_cents\":1100}"
+        },
+        "B": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0011\",\"amount\":1100}"
+        },
+        "C": {
+          "actor": "system",
+          "payload_json": "{\"payment_id\":\"P0011\",\"amount\":1100}"
+        },
+        "D": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0011\",\"amount\":1100}"
+        },
+        "E": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0011\",\"amount\":1100}"
+        }
+      }
+    },
+    {
+      "payment_id": "P0012",
+      "records": {
+        "A": {
+          "actor": "system",
+          "payload_json": "{\"payment_id\":\"P0012\",\"amount_cents\":1200}"
+        },
+        "B": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0012\",\"amount\":1200}"
+        },
+        "C": {
+          "actor": "system",
+          "payload_json": "{\"payment_id\":\"P0012\",\"amount\":1200}"
+        },
+        "D": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0012\",\"amount\":1200}"
+        },
+        "E": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0012\",\"amount\":1200}"
+        }
+      }
+    },
+    {
+      "payment_id": "P0013",
+      "records": {
+        "A": {
+          "actor": "system",
+          "payload_json": "{\"payment_id\":\"P0013\",\"amount_cents\":1300}"
+        },
+        "B": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0013\",\"amount\":1300}"
+        },
+        "C": {
+          "actor": "system",
+          "payload_json": "{\"payment_id\":\"P0013\",\"amount\":1300}"
+        },
+        "D": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0013\",\"amount\":1300}"
+        },
+        "E": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0013\",\"amount\":1300}"
+        }
+      }
+    },
+    {
+      "payment_id": "P0014",
+      "records": {
+        "A": {
+          "actor": "system",
+          "payload_json": "{\"payment_id\":\"P0014\",\"amount_cents\":1400}"
+        },
+        "B": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0014\",\"amount\":1400}"
+        },
+        "C": {
+          "actor": "system",
+          "payload_json": "{\"payment_id\":\"P0014\",\"amount\":1400}"
+        },
+        "D": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0014\",\"amount\":1400}"
+        },
+        "E": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0014\",\"amount\":1400}"
+        }
+      }
+    },
+    {
+      "payment_id": "P0015",
+      "records": {
+        "A": {
+          "actor": "system",
+          "payload_json": "{\"payment_id\":\"P0015\",\"amount_cents\":1500}"
+        },
+        "B": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0015\",\"amount\":1500}"
+        },
+        "C": {
+          "actor": "system",
+          "payload_json": "{\"payment_id\":\"P0015\",\"amount\":1500}"
+        },
+        "D": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0015\",\"amount\":1500}"
+        },
+        "E": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0015\",\"amount\":1500}"
+        }
+      }
+    },
+    {
+      "payment_id": "P0016",
+      "records": {
+        "A": {
+          "actor": "system",
+          "payload_json": "{\"payment_id\":\"P0016\",\"amount_cents\":1600}"
+        },
+        "B": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0016\",\"amount\":1600}"
+        },
+        "C": {
+          "actor": "system",
+          "payload_json": "{\"payment_id\":\"P0016\",\"amount\":1600}"
+        },
+        "D": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0016\",\"amount\":1600}"
+        },
+        "E": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0016\",\"amount\":1600}"
+        }
+      }
+    },
+    {
+      "payment_id": "P0017",
+      "records": {
+        "A": {
+          "actor": "system",
+          "payload_json": "{\"payment_id\":\"P0017\",\"amount_cents\":1700}"
+        },
+        "B": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0017\",\"amount\":1700}"
+        },
+        "C": {
+          "actor": "system",
+          "payload_json": "{\"payment_id\":\"P0017\",\"amount\":1700}"
+        },
+        "D": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0017\",\"amount\":1700}"
+        },
+        "E": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0017\",\"amount\":1700}"
+        }
+      }
+    },
+    {
+      "payment_id": "P0018",
+      "records": {
+        "A": {
+          "actor": "system",
+          "payload_json": "{\"payment_id\":\"P0018\",\"amount_cents\":1800}"
+        },
+        "B": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0018\",\"amount\":1800}"
+        },
+        "C": {
+          "actor": "system",
+          "payload_json": "{\"payment_id\":\"P0018\",\"amount\":1800}"
+        },
+        "D": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0018\",\"amount\":1800}"
+        },
+        "E": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0018\",\"amount\":1800}"
+        }
+      }
+    },
+    {
+      "payment_id": "P0019",
+      "records": {
+        "A": {
+          "actor": "system",
+          "payload_json": "{\"payment_id\":\"P0019\",\"amount_cents\":1900}"
+        },
+        "B": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0019\",\"amount\":1900}"
+        },
+        "C": {
+          "actor": "system",
+          "payload_json": "{\"payment_id\":\"P0019\",\"amount\":1900}"
+        },
+        "D": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0019\",\"amount\":1900}"
+        },
+        "E": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0019\",\"amount\":1900}"
+        }
+      }
+    },
+    {
+      "payment_id": "P0020",
+      "records": {
+        "A": {
+          "actor": "system",
+          "payload_json": "{\"payment_id\":\"P0020\",\"amount_cents\":2000}"
+        },
+        "B": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0020\",\"amount\":2000}"
+        },
+        "C": {
+          "actor": "system",
+          "payload_json": "{\"payment_id\":\"P0020\",\"amount\":2000}"
+        },
+        "D": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0020\",\"amount\":2000}"
+        },
+        "E": {
+          "actor": "attacker",
+          "payload_json": "{\"payment_id\":\"P0020\",\"amount\":2000}"
+        }
+      }
+    }
+  ]
+}

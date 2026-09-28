@@ -1,0 +1,742 @@
+{
+  "P0001": {
+    "A": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount_cents",
+      "semantic_type": "Cents",
+      "raw_value": 500,
+      "expected_amount_yuan": 5.0
+    },
+    "B": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 500,
+      "expected_amount_yuan": 5.0
+    },
+    "C": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Yuan",
+      "raw_value": 500,
+      "expected_amount_yuan": 500
+    },
+    "D": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 500,
+      "expected_amount_yuan": 5.0
+    },
+    "E": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 500,
+      "expected_amount_yuan": 5.0
+    }
+  },
+  "P0002": {
+    "A": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount_cents",
+      "semantic_type": "Cents",
+      "raw_value": 100,
+      "expected_amount_yuan": 1.0
+    },
+    "B": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 100,
+      "expected_amount_yuan": 1.0
+    },
+    "C": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Yuan",
+      "raw_value": 100,
+      "expected_amount_yuan": 100
+    },
+    "D": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 100,
+      "expected_amount_yuan": 1.0
+    },
+    "E": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 100,
+      "expected_amount_yuan": 1.0
+    }
+  },
+  "P0003": {
+    "A": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount_cents",
+      "semantic_type": "Cents",
+      "raw_value": 200,
+      "expected_amount_yuan": 2.0
+    },
+    "B": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 200,
+      "expected_amount_yuan": 2.0
+    },
+    "C": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Yuan",
+      "raw_value": 200,
+      "expected_amount_yuan": 200
+    },
+    "D": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 200,
+      "expected_amount_yuan": 2.0
+    },
+    "E": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 200,
+      "expected_amount_yuan": 2.0
+    }
+  },
+  "P0004": {
+    "A": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount_cents",
+      "semantic_type": "Cents",
+      "raw_value": 300,
+      "expected_amount_yuan": 3.0
+    },
+    "B": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 300,
+      "expected_amount_yuan": 3.0
+    },
+    "C": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Yuan",
+      "raw_value": 300,
+      "expected_amount_yuan": 300
+    },
+    "D": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 300,
+      "expected_amount_yuan": 3.0
+    },
+    "E": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 300,
+      "expected_amount_yuan": 3.0
+    }
+  },
+  "P0005": {
+    "A": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount_cents",
+      "semantic_type": "Cents",
+      "raw_value": 400,
+      "expected_amount_yuan": 4.0
+    },
+    "B": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 400,
+      "expected_amount_yuan": 4.0
+    },
+    "C": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Yuan",
+      "raw_value": 400,
+      "expected_amount_yuan": 400
+    },
+    "D": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 400,
+      "expected_amount_yuan": 4.0
+    },
+    "E": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 400,
+      "expected_amount_yuan": 4.0
+    }
+  },
+  "P0006": {
+    "A": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount_cents",
+      "semantic_type": "Cents",
+      "raw_value": 600,
+      "expected_amount_yuan": 6.0
+    },
+    "B": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 600,
+      "expected_amount_yuan": 6.0
+    },
+    "C": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Yuan",
+      "raw_value": 600,
+      "expected_amount_yuan": 600
+    },
+    "D": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 600,
+      "expected_amount_yuan": 6.0
+    },
+    "E": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 600,
+      "expected_amount_yuan": 6.0
+    }
+  },
+  "P0007": {
+    "A": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount_cents",
+      "semantic_type": "Cents",
+      "raw_value": 700,
+      "expected_amount_yuan": 7.0
+    },
+    "B": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 700,
+      "expected_amount_yuan": 7.0
+    },
+    "C": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Yuan",
+      "raw_value": 700,
+      "expected_amount_yuan": 700
+    },
+    "D": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 700,
+      "expected_amount_yuan": 7.0
+    },
+    "E": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 700,
+      "expected_amount_yuan": 7.0
+    }
+  },
+  "P0008": {
+    "A": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount_cents",
+      "semantic_type": "Cents",
+      "raw_value": 800,
+      "expected_amount_yuan": 8.0
+    },
+    "B": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 800,
+      "expected_amount_yuan": 8.0
+    },
+    "C": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Yuan",
+      "raw_value": 800,
+      "expected_amount_yuan": 800
+    },
+    "D": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 800,
+      "expected_amount_yuan": 8.0
+    },
+    "E": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 800,
+      "expected_amount_yuan": 8.0
+    }
+  },
+  "P0009": {
+    "A": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount_cents",
+      "semantic_type": "Cents",
+      "raw_value": 900,
+      "expected_amount_yuan": 9.0
+    },
+    "B": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 900,
+      "expected_amount_yuan": 9.0
+    },
+    "C": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Yuan",
+      "raw_value": 900,
+      "expected_amount_yuan": 900
+    },
+    "D": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 900,
+      "expected_amount_yuan": 9.0
+    },
+    "E": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 900,
+      "expected_amount_yuan": 9.0
+    }
+  },
+  "P0010": {
+    "A": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount_cents",
+      "semantic_type": "Cents",
+      "raw_value": 1000,
+      "expected_amount_yuan": 10.0
+    },
+    "B": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 1000,
+      "expected_amount_yuan": 10.0
+    },
+    "C": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Yuan",
+      "raw_value": 1000,
+      "expected_amount_yuan": 1000
+    },
+    "D": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 1000,
+      "expected_amount_yuan": 10.0
+    },
+    "E": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 1000,
+      "expected_amount_yuan": 10.0
+    }
+  },
+  "P0011": {
+    "A": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount_cents",
+      "semantic_type": "Cents",
+      "raw_value": 1100,
+      "expected_amount_yuan": 11.0
+    },
+    "B": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 1100,
+      "expected_amount_yuan": 11.0
+    },
+    "C": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Yuan",
+      "raw_value": 1100,
+      "expected_amount_yuan": 1100
+    },
+    "D": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 1100,
+      "expected_amount_yuan": 11.0
+    },
+    "E": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 1100,
+      "expected_amount_yuan": 11.0
+    }
+  },
+  "P0012": {
+    "A": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount_cents",
+      "semantic_type": "Cents",
+      "raw_value": 1200,
+      "expected_amount_yuan": 12.0
+    },
+    "B": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 1200,
+      "expected_amount_yuan": 12.0
+    },
+    "C": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Yuan",
+      "raw_value": 1200,
+      "expected_amount_yuan": 1200
+    },
+    "D": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 1200,
+      "expected_amount_yuan": 12.0
+    },
+    "E": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 1200,
+      "expected_amount_yuan": 12.0
+    }
+  },
+  "P0013": {
+    "A": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount_cents",
+      "semantic_type": "Cents",
+      "raw_value": 1300,
+      "expected_amount_yuan": 13.0
+    },
+    "B": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 1300,
+      "expected_amount_yuan": 13.0
+    },
+    "C": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Yuan",
+      "raw_value": 1300,
+      "expected_amount_yuan": 1300
+    },
+    "D": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 1300,
+      "expected_amount_yuan": 13.0
+    },
+    "E": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 1300,
+      "expected_amount_yuan": 13.0
+    }
+  },
+  "P0014": {
+    "A": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount_cents",
+      "semantic_type": "Cents",
+      "raw_value": 1400,
+      "expected_amount_yuan": 14.0
+    },
+    "B": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 1400,
+      "expected_amount_yuan": 14.0
+    },
+    "C": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Yuan",
+      "raw_value": 1400,
+      "expected_amount_yuan": 1400
+    },
+    "D": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 1400,
+      "expected_amount_yuan": 14.0
+    },
+    "E": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 1400,
+      "expected_amount_yuan": 14.0
+    }
+  },
+  "P0015": {
+    "A": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount_cents",
+      "semantic_type": "Cents",
+      "raw_value": 1500,
+      "expected_amount_yuan": 15.0
+    },
+    "B": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 1500,
+      "expected_amount_yuan": 15.0
+    },
+    "C": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Yuan",
+      "raw_value": 1500,
+      "expected_amount_yuan": 1500
+    },
+    "D": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 1500,
+      "expected_amount_yuan": 15.0
+    },
+    "E": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 1500,
+      "expected_amount_yuan": 15.0
+    }
+  },
+  "P0016": {
+    "A": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount_cents",
+      "semantic_type": "Cents",
+      "raw_value": 1600,
+      "expected_amount_yuan": 16.0
+    },
+    "B": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 1600,
+      "expected_amount_yuan": 16.0
+    },
+    "C": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Yuan",
+      "raw_value": 1600,
+      "expected_amount_yuan": 1600
+    },
+    "D": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 1600,
+      "expected_amount_yuan": 16.0
+    },
+    "E": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 1600,
+      "expected_amount_yuan": 16.0
+    }
+  },
+  "P0017": {
+    "A": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount_cents",
+      "semantic_type": "Cents",
+      "raw_value": 1700,
+      "expected_amount_yuan": 17.0
+    },
+    "B": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 1700,
+      "expected_amount_yuan": 17.0
+    },
+    "C": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Yuan",
+      "raw_value": 1700,
+      "expected_amount_yuan": 1700
+    },
+    "D": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 1700,
+      "expected_amount_yuan": 17.0
+    },
+    "E": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 1700,
+      "expected_amount_yuan": 17.0
+    }
+  },
+  "P0018": {
+    "A": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount_cents",
+      "semantic_type": "Cents",
+      "raw_value": 1800,
+      "expected_amount_yuan": 18.0
+    },
+    "B": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 1800,
+      "expected_amount_yuan": 18.0
+    },
+    "C": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Yuan",
+      "raw_value": 1800,
+      "expected_amount_yuan": 1800
+    },
+    "D": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 1800,
+      "expected_amount_yuan": 18.0
+    },
+    "E": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 1800,
+      "expected_amount_yuan": 18.0
+    }
+  },
+  "P0019": {
+    "A": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount_cents",
+      "semantic_type": "Cents",
+      "raw_value": 1900,
+      "expected_amount_yuan": 19.0
+    },
+    "B": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 1900,
+      "expected_amount_yuan": 19.0
+    },
+    "C": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Yuan",
+      "raw_value": 1900,
+      "expected_amount_yuan": 1900
+    },
+    "D": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 1900,
+      "expected_amount_yuan": 19.0
+    },
+    "E": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 1900,
+      "expected_amount_yuan": 19.0
+    }
+  },
+  "P0020": {
+    "A": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount_cents",
+      "semantic_type": "Cents",
+      "raw_value": 2000,
+      "expected_amount_yuan": 20.0
+    },
+    "B": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 2000,
+      "expected_amount_yuan": 20.0
+    },
+    "C": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Yuan",
+      "raw_value": 2000,
+      "expected_amount_yuan": 2000
+    },
+    "D": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 2000,
+      "expected_amount_yuan": 20.0
+    },
+    "E": {
+      "source_tool": "get_payment_record",
+      "source_field": "amount",
+      "semantic_type": "Cents",
+      "raw_value": 2000,
+      "expected_amount_yuan": 20.0
+    }
+  }
+}

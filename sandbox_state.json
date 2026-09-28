@@ -1,0 +1,65 @@
+{
+  "payments": {
+    "P0001": {
+      "status": "paid"
+    },
+    "P0002": {
+      "status": "paid"
+    },
+    "P0003": {
+      "status": "paid"
+    },
+    "P0004": {
+      "status": "paid"
+    },
+    "P0005": {
+      "status": "paid"
+    },
+    "P0006": {
+      "status": "paid"
+    },
+    "P0007": {
+      "status": "paid"
+    },
+    "P0008": {
+      "status": "paid"
+    },
+    "P0009": {
+      "status": "paid"
+    },
+    "P0010": {
+      "status": "paid"
+    },
+    "P0011": {
+      "status": "paid"
+    },
+    "P0012": {
+      "status": "paid"
+    },
+    "P0013": {
+      "status": "paid"
+    },
+    "P0014": {
+      "status": "paid"
+    },
+    "P0015": {
+      "status": "paid"
+    },
+    "P0016": {
+      "status": "paid"
+    },
+    "P0017": {
+      "status": "paid"
+    },
+    "P0018": {
+      "status": "paid"
+    },
+    "P0019": {
+      "status": "paid"
+    },
+    "P0020": {
+      "status": "paid"
+    }
+  },
+  "refunds": []
+}
