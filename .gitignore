@@ -1,3 +1,8 @@
 outputs/
+outputs_agentexecutor/
 __pycache__/
 *.pyc
+.venv/
+.env
+.dotenv
+cache/

@@ -1,4 +1,4 @@
-"""Run the ContractShift pilot with LangChain tools and a LangGraph agent loop."""
+"""Run the ContractShift pilot with LangChain's tools agent and AgentExecutor."""
 
 from __future__ import annotations
 
@@ -12,14 +12,13 @@ import random
 import re
 import subprocess
 import sys
-import time
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Annotated, Any, TypedDict
+from typing import Any
 
 
 ROOT = Path(__file__).resolve().parent
-DEFAULT_OUTPUT = ROOT / "outputs"
+DEFAULT_OUTPUT = ROOT / "outputs_agentexecutor"
 MODEL_TEMPERATURE = 0.2
 TOP_P = 1.0
 MAX_TOKENS = 512
@@ -60,21 +59,20 @@ def now_utc() -> str:
 
 def available_framework() -> dict[str, str]:
     try:
+        from langchain.agents import AgentExecutor, create_openai_tools_agent  # noqa: F401
         from langchain_core.messages import AIMessage, HumanMessage, SystemMessage, ToolMessage  # noqa: F401
+        from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder  # noqa: F401
         from langchain_core.tools import StructuredTool  # noqa: F401
         from langchain_openai import ChatOpenAI  # noqa: F401
-        from langgraph.graph import END, StateGraph  # noqa: F401
-        from langgraph.prebuilt import ToolNode  # noqa: F401
     except ImportError as exc:
         raise EnvironmentNotReady(
-            "缺少 LangChain/LangGraph 运行依赖。请在 ContractShift 目录安装 "
+            "缺少 LangChain AgentExecutor 运行依赖。请在 ContractShift 目录安装 "
             "requirements-framework.txt，或使用 Chord 仓库已锁定的依赖环境。"
         ) from exc
     return {
         "langchain": importlib.metadata.version("langchain"),
         "langchain_core": importlib.metadata.version("langchain-core"),
         "langchain_openai": importlib.metadata.version("langchain-openai"),
-        "langgraph": importlib.metadata.version("langgraph"),
     }
 
 
@@ -90,7 +88,12 @@ def make_model_config(args: argparse.Namespace) -> dict[str, str]:
             "CONTRACTSHIFT_API_KEY、CONTRACTSHIFT_MODEL（优先 Qwen3-8B，"
             "或使用已配置的固定版本 API 模型）。"
         )
-    return {"base_url": base_url.rstrip("/"), "api_key": api_key, "model": model}
+    return {
+        "base_url": base_url.rstrip("/"),
+        "api_key": api_key,
+        "model": model,
+        "reasoning_effort": "none" if model == "deepseek-v4-pro" else "",
+    }
 
 
 def tool_specs() -> list[dict[str, Any]]:
@@ -170,28 +173,35 @@ class EpisodeContext:
     def get_llm(self, with_seed: bool):
         from langchain_openai import ChatOpenAI
 
+        model_kwargs: dict[str, Any] = {}
+        if self.model_config.get("reasoning_effort"):
+            model_kwargs["reasoning_effort"] = self.model_config["reasoning_effort"]
+
         if with_seed:
             if self.seeded_llm is None:
                 self.seeded_llm = ChatOpenAI(
                     model=self.model_config["model"],
                     base_url=self.model_config["base_url"],
                     api_key=self.model_config["api_key"],
+                    seed=self.seed,
                     temperature=MODEL_TEMPERATURE,
                     top_p=TOP_P,
                     max_tokens=MAX_TOKENS,
                     timeout=180,
-                    model_kwargs={"seed": self.seed},
+                    model_kwargs=model_kwargs,
                 )
             return self.seeded_llm
         if self.unseeded_llm is None:
             self.unseeded_llm = ChatOpenAI(
-                model=self.model_config["model"],
-                base_url=self.model_config["base_url"],
-                api_key=self.model_config["api_key"],
-                temperature=MODEL_TEMPERATURE,
+                    model=self.model_config["model"],
+                    base_url=self.model_config["base_url"],
+                    api_key=self.model_config["api_key"],
+                    seed=None,
+                    temperature=MODEL_TEMPERATURE,
                 top_p=TOP_P,
                 max_tokens=MAX_TOKENS,
                 timeout=180,
+                model_kwargs=model_kwargs,
             )
         return self.unseeded_llm
 
@@ -272,60 +282,51 @@ def build_tools(context: EpisodeContext) -> list[Any]:
 
 
 def build_agent(context: EpisodeContext, tools: list[Any]):
-    from langchain_core.messages import AIMessage
-    from langgraph.graph import END, StateGraph
-    from langgraph.graph.message import add_messages
-    from langgraph.prebuilt import ToolNode
+    from langchain.agents import AgentExecutor, create_openai_tools_agent
+    from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 
-    class LocalAgentState(TypedDict):
-        messages: Annotated[list[Any], add_messages]
-        source_called: bool
-        step_count: int
+    agent_tools = tools
+    if context.condition == "D":
+        agent_tools = [tool for tool in tools if tool.name == "issue_refund"]
 
-    def allowed_tools(state: LocalAgentState) -> list[Any]:
-        if context.condition == "D" and state.get("source_called", False):
-            return [tool for tool in tools if tool.name == "issue_refund"]
-        return tools
+    prompt = ChatPromptTemplate.from_messages(
+        [
+            ("system", SYSTEM_PROMPT),
+            MessagesPlaceholder(variable_name="chat_history", optional=True),
+            ("human", "{input}"),
+            MessagesPlaceholder(variable_name="agent_scratchpad"),
+        ]
+    )
+    model = context.get_llm(context.seed_supported is not False).bind(parallel_tool_calls=False)
+    agent = create_openai_tools_agent(model, agent_tools, prompt)
+    executor = AgentExecutor(
+        agent=agent,
+        tools=agent_tools,
+        max_iterations=MAX_STEPS,
+        early_stopping_method="force",
+        return_intermediate_steps=True,
+        verbose=False,
+    )
+    return executor, agent_tools
 
-    def call_model(state: LocalAgentState) -> dict[str, Any]:
-        from langchain_core.messages import AIMessage
 
-        selected_tools = allowed_tools(state)
-        prompt_messages = list(state["messages"])
-        started = time.perf_counter()
-        with_seed = context.seed_supported is not False
-        try:
-            try:
-                response = context.get_llm(with_seed).bind_tools(selected_tools).invoke(prompt_messages)
-                context.seed_supported = with_seed
-            except Exception as exc:
-                if not with_seed or "seed" not in str(exc).lower():
-                    raise
-                append_jsonl(
-                    context.raw_requests_path,
-                    {
-                        "phase": context.phase,
-                        "condition": context.condition,
-                        "payment_id": context.payment_id,
-                        "seed": context.seed,
-                        "run_index": context.run_index,
-                        "step": state["step_count"],
-                        "request": {
-                            "model": context.model_config["model"],
-                            "messages": [serialize_message(m) for m in prompt_messages],
-                            "tools": [serialize_tool_definition(tool) for tool in selected_tools],
-                            "seed": context.seed,
-                        },
-                        "response": {"error": str(exc), "seed_retry": True},
-                        "latency_ms": round((time.perf_counter() - started) * 1000, 2),
-                    },
-                )
-                context.seed_supported = False
-                response = context.get_llm(False).bind_tools(selected_tools).invoke(prompt_messages)
+def log_agent_requests(
+    messages: list[Any],
+    first_response_index: int,
+    context: EpisodeContext,
+    tools: list[Any],
+) -> None:
+    from langchain_core.messages import AIMessage, SystemMessage
 
-            metadata = getattr(response, "response_metadata", {}) or {}
+    model_history: list[Any] = []
+    response_step = 0
+    for index, message in enumerate(messages):
+        if index >= first_response_index and isinstance(message, AIMessage):
+            metadata = getattr(message, "response_metadata", {}) or {}
             context.reported_model = metadata.get("model_name") or metadata.get("model", context.model_config["model"])
-            context.request_id = getattr(response, "id", None) or context.request_id
+            context.request_id = getattr(message, "id", None) or context.request_id
+            context.seed_supported = context.seed_supported is not False
+            request_messages = [SystemMessage(content=SYSTEM_PROMPT), *model_history]
             append_jsonl(
                 context.raw_requests_path,
                 {
@@ -334,70 +335,48 @@ def build_agent(context: EpisodeContext, tools: list[Any]):
                     "payment_id": context.payment_id,
                     "seed": context.seed,
                     "run_index": context.run_index,
-                    "step": state["step_count"],
+                    "step": response_step,
                     "request": {
                         "model": context.model_config["model"],
-                        "messages": [serialize_message(m) for m in prompt_messages],
-                        "tools": [serialize_tool_definition(tool) for tool in selected_tools],
+                        "reasoning_effort": context.model_config.get("reasoning_effort") or None,
+                        "messages": [serialize_message(item) for item in request_messages],
+                        "tools": [serialize_tool_definition(tool) for tool in tools],
                         "temperature": MODEL_TEMPERATURE,
                         "top_p": TOP_P,
                         "max_tokens": MAX_TOKENS,
                         "seed": context.seed if context.seed_supported else None,
                     },
-                    "response": serialize_message(response),
+                    "response": serialize_message(message),
                     "response_metadata": metadata,
-                    "latency_ms": round((time.perf_counter() - started) * 1000, 2),
                 },
             )
-        except Exception as exc:
-            context.errors.append(f"{type(exc).__name__}: {exc}")
-            response = AIMessage(content="")
-        context.messages = [*prompt_messages, response]
-        return {"messages": [response], "step_count": state["step_count"] + 1}
+            response_step += 1
+        model_history.append(message)
 
-    def run_tools(state: LocalAgentState) -> dict[str, Any]:
-        from langchain_core.messages import AIMessage, ToolMessage
 
-        latest = state["messages"][-1]
-        if not isinstance(latest, AIMessage):
-            return {"messages": [], "source_called": context.source_called}
-        tool_messages = []
-        for call in latest.tool_calls:
-            selected_tools = allowed_tools({**state, "source_called": context.source_called})
-            try:
-                result = ToolNode(selected_tools, handle_tool_errors=True).invoke(
-                    {"messages": [AIMessage(content="", tool_calls=[call])]}
-                )
-                tool_messages.extend(result.get("messages", []))
-            except Exception as exc:
-                error_text = f"TOOL_ERROR: {type(exc).__name__}: {exc}"
-                context.errors.append(error_text)
-                tool_messages.append(
-                    ToolMessage(
-                        content=error_text,
-                        tool_call_id=call.get("id", "unknown"),
-                        name=call.get("name", "unknown"),
-                    )
-                )
-        context.messages = [*context.messages, *tool_messages]
-        return {"messages": tool_messages, "source_called": context.source_called}
-
-    def route_after_model(state: LocalAgentState) -> str:
-        latest = state["messages"][-1]
-        if isinstance(latest, AIMessage) and latest.tool_calls:
-            return "tools"
-        return END
-
-    def route_after_tools(state: LocalAgentState) -> str:
-        return END if state["step_count"] >= MAX_STEPS else "agent"
-
-    workflow = StateGraph(LocalAgentState)
-    workflow.add_node("agent", call_model)
-    workflow.add_node("tools", run_tools)
-    workflow.set_entry_point("agent")
-    workflow.add_conditional_edges("agent", route_after_model, {"tools": "tools", END: END})
-    workflow.add_conditional_edges("tools", route_after_tools, {"agent": "agent", END: END})
-    return workflow.compile()
+def log_seed_retry(context: EpisodeContext, tools: list[Any], error: Exception) -> None:
+    append_jsonl(
+        context.raw_requests_path,
+        {
+            "phase": context.phase,
+            "condition": context.condition,
+            "payment_id": context.payment_id,
+            "seed": context.seed,
+            "run_index": context.run_index,
+            "step": 0,
+            "request": {
+                "model": context.model_config["model"],
+                "reasoning_effort": context.model_config.get("reasoning_effort") or None,
+                "messages": [serialize_message(message) for message in context.messages],
+                "tools": [serialize_tool_definition(tool) for tool in tools],
+                "temperature": MODEL_TEMPERATURE,
+                "top_p": TOP_P,
+                "max_tokens": MAX_TOKENS,
+                "seed": context.seed,
+            },
+            "response": {"error": f"{type(error).__name__}: {error}", "seed_retry": True},
+        },
+    )
 
 
 def parse_call_args(call: dict[str, Any]) -> Any:
@@ -492,6 +471,35 @@ def build_tool_trace(messages: list[Any], context: EpisodeContext) -> tuple[list
     return trace, source_payload, source_actor
 
 
+def collect_agent_messages(result: dict[str, Any], initial_messages: list[Any], payment_id: str, seed: int) -> list[Any]:
+    from langchain_core.messages import AIMessage, ToolMessage
+
+    messages = list(initial_messages)
+    for action, observation in result.get("intermediate_steps", []):
+        action_messages = list(getattr(action, "message_log", []) or [])
+        messages.extend(action_messages)
+        tool_call_id = getattr(action, "tool_call_id", None)
+        if not tool_call_id:
+            for action_message in reversed(action_messages):
+                for tool_call in getattr(action_message, "tool_calls", []) or []:
+                    if tool_call.get("name") == action.tool:
+                        tool_call_id = tool_call.get("id")
+                        break
+                if tool_call_id:
+                    break
+        messages.append(
+            ToolMessage(
+                content=str(observation),
+                name=action.tool,
+                tool_call_id=tool_call_id or f"{payment_id}-{seed}-{len(messages)}",
+            )
+        )
+    final_output = str(result.get("output", ""))
+    if final_output and final_output != "Agent stopped due to max iterations.":
+        messages.append(AIMessage(content=final_output))
+    return messages
+
+
 def invoke_episode(
     model_config: dict[str, str],
     framework_versions: dict[str, str],
@@ -506,7 +514,7 @@ def invoke_episode(
     run_index: int,
     raw_requests_path: Path,
 ) -> dict[str, Any]:
-    from langchain_core.messages import HumanMessage, SystemMessage
+    from langchain_core.messages import AIMessage, HumanMessage, ToolMessage
 
     state = copy.deepcopy(initial_state)
     context = EpisodeContext(
@@ -522,19 +530,68 @@ def invoke_episode(
         specs,
     )
     tools = build_tools(context)
-    agent = build_agent(context, tools)
     task = TASK_TEMPLATE.format(payment_id=payment_id)
-    initial_messages = [SystemMessage(content=SYSTEM_PROMPT), HumanMessage(content=task)]
-    context.messages = initial_messages
-    try:
-        result = agent.invoke(
-            {"messages": initial_messages, "source_called": False, "step_count": 0},
-            config={"recursion_limit": 12},
+    chat_history: list[Any] = []
+    if condition == "D":
+        source_tool = next(tool for tool in tools if tool.name == "get_payment_record")
+        source_call_id = f"prefilled-source-{payment_id}-{seed}"
+        source_output = source_tool.invoke({"payment_id": payment_id})
+        chat_history.extend(
+            [
+                AIMessage(
+                    content="",
+                    tool_calls=[
+                        {
+                            "name": "get_payment_record",
+                            "args": {"payment_id": payment_id},
+                            "id": source_call_id,
+                            "type": "tool_call",
+                        }
+                    ],
+                ),
+                ToolMessage(
+                    content=str(source_output),
+                    name="get_payment_record",
+                    tool_call_id=source_call_id,
+                ),
+            ]
         )
-        messages = result.get("messages", context.messages)
+    initial_messages = [*chat_history, HumanMessage(content=task)]
+    context.messages = initial_messages
+    agent_tools = [tool for tool in tools if condition != "D" or tool.name == "issue_refund"]
+    try:
+        agent, agent_tools = build_agent(context, tools)
+        result = agent.invoke(
+            {"input": task, "chat_history": chat_history},
+        )
+        messages = collect_agent_messages(result, initial_messages, payment_id, seed)
     except Exception as exc:
-        context.errors.append(f"{type(exc).__name__}: {exc}")
-        messages = context.messages
+        if "seed" in str(exc).lower() and context.seed_supported is not False and not state["refunds"]:
+            log_seed_retry(context, agent_tools, exc)
+            context.seed_supported = False
+            state.clear()
+            state.update(copy.deepcopy(initial_state))
+            context.state = state
+            context.source_called = condition == "D"
+            context.source_payment_ids = [payment_id] if condition == "D" else []
+            context.errors.clear()
+            context.checker_log.clear()
+            context.request_id = None
+            context.reported_model = model_config["model"]
+            try:
+                agent, agent_tools = build_agent(context, tools)
+                result = agent.invoke(
+                    {"input": task, "chat_history": chat_history},
+                )
+                messages = collect_agent_messages(result, initial_messages, payment_id, seed)
+            except Exception as retry_exc:
+                context.errors.append(f"{type(retry_exc).__name__}: {retry_exc}")
+                messages = context.messages
+        else:
+            context.errors.append(f"{type(exc).__name__}: {exc}")
+            messages = context.messages
+    context.messages = messages
+    log_agent_requests(messages, len(initial_messages), context, agent_tools)
     tool_trace, source_payload, source_actor = build_tool_trace(messages, context)
     source_condition = "B" if condition == "E" else condition
     episode = {
@@ -545,8 +602,9 @@ def invoke_episode(
         "seed": seed,
         "model_version": context.reported_model,
         "configured_model": model_config["model"],
-        "backend": "langchain-openai+langgraph",
-        "framework": "LangGraph StateGraph + ToolNode",
+        "backend": "langchain-openai+langchain-agents",
+        "framework": "LangChain create_openai_tools_agent + AgentExecutor",
+        "source_tool_prefilled_by_harness": condition == "D",
         "framework_versions": framework_versions,
         "request_id": context.request_id,
         "seed_supported": context.seed_supported,
@@ -567,15 +625,18 @@ def invoke_episode(
 
 def create_config(model_config: dict[str, str], framework_versions: dict[str, str], order_seed: int) -> dict[str, Any]:
     return {
-        "backend": "langchain-openai+langgraph",
-        "framework": "LangGraph StateGraph + ToolNode",
+        "backend": "langchain-openai+langchain-agents",
+        "framework": "LangChain create_openai_tools_agent + AgentExecutor",
+        "agent": "langchain.agents.create_openai_tools_agent",
         "framework_versions": framework_versions,
         "model": model_config["model"],
         "base_url": model_config["base_url"],
+        "reasoning_effort": model_config.get("reasoning_effort") or None,
         "temperature": MODEL_TEMPERATURE,
         "top_p": TOP_P,
         "max_tokens": MAX_TOKENS,
         "max_steps": MAX_STEPS,
+        "parallel_tool_calls": False,
         "screen_model_seeds": list(SEEDS[:2]),
         "full_model_seeds": list(SEEDS),
         "run_order_seed": order_seed,
@@ -704,7 +765,7 @@ def main() -> int:
 
     schedule = [run for run in plan_runs(args.phase, args.order_seed) if run not in existing_keys]
     run_counter = len(existing)
-    print(f"phase={args.phase} framework=LangGraph model={model_config['model']} planned_new_episodes={len(schedule)}")
+    print(f"phase={args.phase} framework=LangChain AgentExecutor model={model_config['model']} planned_new_episodes={len(schedule)}")
     for new_index, (condition, payment_id, seed) in enumerate(schedule, start=1):
         run_counter += 1
         episode = invoke_episode(
@@ -730,7 +791,7 @@ def main() -> int:
     status = {
         "status": "episodes_written",
         "phase": args.phase,
-        "framework": "LangGraph StateGraph + ToolNode",
+        "framework": "LangChain create_openai_tools_agent + AgentExecutor",
         "new_episodes": len(schedule),
         "episode_file": str(episode_file),
         "model": model_config["model"],
