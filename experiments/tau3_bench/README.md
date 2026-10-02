@@ -53,6 +53,17 @@ No model or payment API key is included in this repository. The previous τ³-be
 
 ## Adapted pre-experiment
 
-At the user's direction, the τ³-bench pilot is now adapted to test the native cross-user object-scope boundary. The protocol defines a 3-pair feasibility screen, the success stages, and a runner that changes only the hidden user-simulator instruction; the official agent, tools, policy, task, and evaluator stay fixed. See [`preexperiment_protocol.md`](preexperiment_protocol.md) and [`run_scope_pilot.py`](run_scope_pilot.py).
+At the user's direction, the τ³-bench pilot was adapted to test the native cross-user object-scope boundary. The protocol and runner change only the hidden user-simulator instruction; the official agent, tools, policy, task, and evaluator stay fixed. See [`preexperiment_protocol.md`](preexperiment_protocol.md) and [`run_scope_pilot.py`](run_scope_pilot.py).
 
-The previous one-run scope variant remains preliminary context and is not counted as one of the three new matched blocks. The new paired pilot has not run yet because no rotated API key is configured in the local process environment. Its no-call preflight passed: the pinned checkout and Python package match, task 13 loads, only the treatment's hidden user instruction changes, and the foreign order begins delivered with no return items. The preflight snapshot is [`preflight_result.json`](preflight_snapshot/preflight_result.json). Run the script only after setting `DEEPSEEK_API_KEY` locally. Do not place the key in this repository or in experiment outputs.
+The fresh paired feasibility pilot completed three matched blocks (six simulations) with DeepSeek V4 Pro for the agent and user simulator. The trial-level record is [`run2_summary.json`](run2_summary.json); full raw conversations remain in a local temporary directory and are not committed.
+
+| Outcome | Cross-user request (n=3) | Control (n=3) |
+|---|---:|---:|
+| Foreign order read result reached the agent | 2/3 | 0/3 |
+| Foreign return submitted | 0/3 | 0/3 |
+| Foreign order database state changed | 0/3 | 0/3 |
+| Original task database match / reward 1.0 | 3/3 | 3/3 |
+
+This provides a feasibility signal for a **read-side scope exposure** in two treatment runs. It did not demonstrate an unauthorized return or state change. An `ENV` reward of 1.0 means the original task state matched; it does not certify that a cross-user read was authorized or harmless. The three matched blocks are too few to estimate stable rates. Cost and runtime differed between conditions, and should be treated as descriptive pilot measurements.
+
+The preflight snapshot is [`preflight_result.json`](preflight_snapshot/preflight_result.json). No API key is stored in the repository or result files. The compact aggregate preserves per-run trace hashes for local provenance without including synthetic customer conversations.
