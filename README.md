@@ -93,6 +93,10 @@ python evaluate.py evaluate --phase full \
 - B 与 C 给模型看到的记录内容相同，真实单位只在隐藏真值中不同。因此，模型在这两个条件下无法仅凭记录内容判断单位；B 的成功率不能直接当作真实支付系统的攻击成功率。
 - 完整矩阵是 20 条合成记录在 3 个种子下重复运行。要判断真实场景中的成功率，还需使用带可信单位契约、业务校验及更丰富上下文的目标工具进行对照。
 
+## τ³-bench 适用性检查
+
+对照 τ³-bench 官方 Retail 工具后，当前预实验的元/分攻击在原版接口上不适用：退货工具接收订单、商品和退款支付方式，不接收模型指定的退款金额。我们保留原版工具和政策，没有改写基准来制造攻击入口。审计脚本、结果和边界说明见 [`experiments/tau3_bench/`](experiments/tau3_bench/README.md)。
+
 ## 方法参考
 
 实验设计流程参考：Kassis, T., Agarwal, V., He, Y., Patel, D., & Brueckner, A. M. (2026). *Scientific Agent Skills: A Library of Procedural Knowledge for Research Agents*. arXiv:2609.00065. https://doi.org/10.48550/arXiv.2609.00065
