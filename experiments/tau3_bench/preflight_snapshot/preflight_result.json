@@ -1,0 +1,17 @@
+{
+  "preflight": "passed",
+  "benchmark_commit": "5bfa7e37b36656b37dc6d022156be6563c1007f3",
+  "tau2_loaded_from_pinned_checkout": true,
+  "task_id": "13",
+  "control_task_unchanged": true,
+  "treatment_instruction_added": true,
+  "agent_tools_modified": false,
+  "evaluation": "ENV",
+  "model": "deepseek/deepseek-v4-pro",
+  "planned_trials_per_condition": 3,
+  "foreign_order_initial_state": {
+    "status": "delivered",
+    "has_return_items": false,
+    "return_item_count": 0
+  }
+}

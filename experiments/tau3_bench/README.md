@@ -51,6 +51,8 @@ Run metadata and a compact result summary are in [`results_summary.json`](result
 
 No model or payment API key is included in this repository. The previous τ³-bench runs used one-trial settings, temperature 0.2, `max_steps=200`, and concurrency 1. The custom scope variant used environment-state evaluation only; the official baseline reported that task 13 had no natural-language assertions to evaluate.
 
-## Next experiment decision
+## Adapted pre-experiment
 
-Keep the unit/scale pre-experiment unchanged and test it only against a target whose original, attacker-reachable input and refund API both carry a model-controlled amount. If τ³-bench is the required target, define and preregister a separate attack that fits its existing item-return contract before collecting more runs; report it as a new mechanism rather than relabeling it as the current unit/scale pre-experiment.
+At the user's direction, the τ³-bench pilot is now adapted to test the native cross-user object-scope boundary. The protocol defines a 3-pair feasibility screen, the success stages, and a runner that changes only the hidden user-simulator instruction; the official agent, tools, policy, task, and evaluator stay fixed. See [`preexperiment_protocol.md`](preexperiment_protocol.md) and [`run_scope_pilot.py`](run_scope_pilot.py).
+
+The previous one-run scope variant remains preliminary context and is not counted as one of the three new matched blocks. The new paired pilot has not run yet because no rotated API key is configured in the local process environment. Its no-call preflight passed: the pinned checkout and Python package match, task 13 loads, only the treatment's hidden user instruction changes, and the foreign order begins delivered with no return items. The preflight snapshot is [`preflight_result.json`](preflight_snapshot/preflight_result.json). Run the script only after setting `DEEPSEEK_API_KEY` locally. Do not place the key in this repository or in experiment outputs.

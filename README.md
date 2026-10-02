@@ -95,7 +95,7 @@ python evaluate.py evaluate --phase full \
 
 ## τ³-bench 适用性检查
 
-对照 τ³-bench 官方 Retail 工具后，当前预实验的元/分攻击在原版接口上不适用：退货工具接收订单、商品和退款支付方式，不接收模型指定的退款金额。我们保留原版工具和政策，没有改写基准来制造攻击入口。审计脚本、结果和边界说明见 [`experiments/tau3_bench/`](experiments/tau3_bench/README.md)。
+对照 τ³-bench 官方 Retail 工具后，当前预实验的元/分攻击在原版接口上不适用：退货工具接收订单、商品和退款支付方式，不接收模型指定的退款金额。我们保留原版工具和政策，没有改写基准来制造攻击入口。按平台接口改写的跨用户对象范围可行性试跑方案见 [`experiments/tau3_bench/preexperiment_protocol.md`](experiments/tau3_bench/preexperiment_protocol.md)；原始机制适用性审计见 [`experiments/tau3_bench/README.md`](experiments/tau3_bench/README.md)。
 
 ## 方法参考
 

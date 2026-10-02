@@ -9,6 +9,15 @@
     "reason": "The original retail source has no attacker-controlled payment amount input, and return_delivered_order_items accepts item_ids and payment_method_id but no refund amount.",
     "benchmark_modified": false
   },
+  "adapted_tau3_preexperiment": {
+    "mechanism": "cross-user object-scope boundary",
+    "status": "protocol_and_runner_ready; fresh_paired_pilot_pending_local_rotated_api_key",
+    "trials_per_condition": 3,
+    "total_simulations_planned": 6,
+    "protocol": "preexperiment_protocol.md",
+    "runner": "run_scope_pilot.py",
+    "preflight_passed": true
+  },
   "context_runs": [
     {
       "name": "official_task_13_baseline",
